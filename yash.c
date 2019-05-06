@@ -62,7 +62,8 @@ char *get_user_input(void)
         fprintf(stderr, "Exit: allocation error\n");
         exit(EXIT_FAILURE);
     }
-    return fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+    command = fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+    return command;
 }
 
 // *** main() ***
