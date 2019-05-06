@@ -96,7 +96,7 @@ int main(int argc, char const *argv[])
         printf("# ");                                   // print the prompt
         command = get_user_input();                     // get input from the user
         num_tokens = tokenize_command(command, tokens); // tokenize the user input & get total # of tokens
-        printf(command);
+        printf("%s", command);
 
     } while (status);
 
