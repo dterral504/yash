@@ -8,3 +8,4 @@ OBJ = yash.o parse.o
 
 yash: $(OBJ)
     $(CC) -o $@ $^ $(CFLAGS)
+	
