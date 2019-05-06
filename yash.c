@@ -93,9 +93,9 @@ char *get_user_input(void)
 int main(int argc, char const *argv[])
 {
     char command[MAX_LINE_SIZE];  // initialize variable to hold user input
-    char **tokens;  // initialize array to hold tokens
-    int num_tokens; // initialize variable to count # of tokens
-    job_t *jobs[2];
+    // char **tokens;  // initialize array to hold tokens
+    // int num_tokens; // initialize variable to count # of tokens
+    // job_t *jobs[2];
 
     int status = 1; // holds the return status of execute() - used in do-while loop
     do
