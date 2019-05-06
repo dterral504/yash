@@ -26,16 +26,17 @@ char *get_user_input(void)
 
     while (true)
     {
-        next = getchar(); // get next character of input
+        // next = getchar(); // get next character of input
 
-        if (next == '\n' || next == EOF)
-        { // if end of the command, null terminate the command and return it
-            printf("%s", command);
-            return command;
-        }
-        // else, next is not end of command so append it to the command array and increment i
-        command[i] = next;
-        i++;
+        // if (next == '\n' || next == EOF)
+        // { // if end of the command, null terminate the command and return it
+        //     printf("%s", command);
+        //     return command;
+        // }
+        // // else, next is not end of command so append it to the command array and increment i
+        // command[i] = next;
+        // i++;
+        return fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
     }
 }
 
