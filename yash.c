@@ -55,14 +55,17 @@ int execute(job_t *jobs[], int *num_jobs)
 
 char *get_user_input(void)
 {
-    char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for user input
+    char *command = malloc(sizeof(char)*MAX_LINE_SIZE); 
+    fgets(command, MAX_LINE_SIZE, STDIN_FILENO); 
+    printf("string is: %s\n", command); 
+    // char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for user input
 
-    if (!command)
-    { // check to make sure memory was succesfully allocated
-        fprintf(stderr, "Exit: allocation error\n");
-        exit(EXIT_FAILURE);
-    }
-    command = fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+    // if (!command)
+    // { // check to make sure memory was succesfully allocated
+    //     fprintf(stderr, "Exit: allocation error\n");
+    //     exit(EXIT_FAILURE);
+    // }
+    // command = fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
     return command;
 }
 
