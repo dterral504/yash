@@ -56,7 +56,7 @@ int execute(job_t *jobs[], int *num_jobs)
 }
 
 
-char *get_user_input(char*)
+char *get_user_input(void)
 {
     char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for user input
 
