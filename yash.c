@@ -101,8 +101,8 @@ int main(int argc, char const *argv[])
     do
     {
         printf("# ");                                   // print the prompt
-        command = malloc(sizeof(char)*MAX_LINE_SIZE);
-        fgets(command, MAX_LINE_SIZE, STDIN_FILENO);                   // get input from the user
+        command = malloc(sizeof(char)*40);
+        fgets(command, 40, STDIN_FILENO);                   // get input from the user
        // num_tokens = tokenize_command(command, tokens); // tokenize the user input & get total # of tokens
         printf("%s", command);
         free(command);
