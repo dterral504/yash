@@ -7,4 +7,5 @@ OBJ = yash.o parse.o
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 yash: $(OBJ)
-    $(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS)
+	
