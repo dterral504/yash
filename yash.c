@@ -92,7 +92,7 @@ char *get_user_input(void)
 // continuously handles user commands until the shell is exited
 int main(int argc, char const *argv[])
 {
-    char command[MAX_LINE_SIZE];  // initialize variable to hold user input
+    char* command;  // initialize variable to hold user input
     // char **tokens;  // initialize array to hold tokens
     // int num_tokens; // initialize variable to count # of tokens
     // job_t *jobs[2];
@@ -101,9 +101,11 @@ int main(int argc, char const *argv[])
     do
     {
         printf("# ");                                   // print the prompt
+        command = malloc(sizeof(char)*MAX_LINE_SIZE);
         fgets(command, MAX_LINE_SIZE, STDIN_FILENO);                   // get input from the user
        // num_tokens = tokenize_command(command, tokens); // tokenize the user input & get total # of tokens
         printf("%s", command);
+        free(command);
 
     } while (status);
 
