@@ -30,6 +30,7 @@ char *get_user_input(void)
 
         if (next == '\n' || next == EOF)
         { // if end of the command, null terminate the command and return it
+            printf("%s", command);
             return command;
         }
         // else, next is not end of command so append it to the command array and increment i
