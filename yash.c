@@ -5,39 +5,10 @@
 // #include <sys/types.h>
 // #include <sys/stat.h>
 // #include <fcntl.h>
-
 #include "parse.h"
-
 #include "yash.h"
 
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
-
-char *get_user_input(void)
-{
-    char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for user input
-    int next;                                             // will hold the next character of user input
-    int i;                                                // index for user input
-
-    if (!command)
-    { // check to make sure memory was succesfully allocated
-        fprintf(stderr, "Exit: allocation error\n");
-        exit(EXIT_FAILURE);
-    }
-
-    while (true)
-    {
-        next = getchar(); // get next character of input
-
-        if (next == '\n' || next == EOF)
-        { // if end of the command, null terminate the command and return it
-            printf("%s", command);
-            return command;
-        }
-        // else, next is not end of command so append it to the command array and increment i
-        command[i] = next;
-        i++;
-    }
-}
 
 int execute(job_t *jobs[], int *num_jobs)
 {
@@ -82,6 +53,18 @@ int execute(job_t *jobs[], int *num_jobs)
     return 1;
 }
 
+char *get_user_input(void)
+{
+    char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for user input
+
+    if (!command)
+    { // check to make sure memory was succesfully allocated
+        fprintf(stderr, "Exit: allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+    return fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+}
+
 // *** main() ***
 // continuously handles user commands until the shell is exited
 int main(int argc, char const *argv[])
@@ -97,7 +80,7 @@ int main(int argc, char const *argv[])
         printf("# ");                                   // print the prompt
         command = get_user_input();                     // get input from the user
         num_tokens = tokenize_command(command, tokens); // tokenize the user input & get total # of tokens
-        printf("%s", command);
+        printf("%s: argc=%d", command, num_tokens);
 
     } while (status);
 
