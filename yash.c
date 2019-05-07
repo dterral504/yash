@@ -43,7 +43,7 @@ int main(int argc, char const *argv[]) {
 	do {
 		printf("# ");               		// print the prompt
         command = get_user_input();
-        printf("%s", command);
+        
 		free(command);					
 	} while (status);
 
