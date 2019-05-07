@@ -22,6 +22,34 @@ char *get_user_input(void)
 		exit(EXIT_FAILURE);
 	}
     char* ptr = fgets(command, MAX_LINE_SIZE, stdin);
+    printf("okay\n");
+    int i = 0;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    i++;
+    
     return command;
 
 	// while (true){
