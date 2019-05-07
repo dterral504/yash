@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <unistd.h>
 #include "parse.h"
 // #include <sys/types.h>
@@ -46,13 +47,17 @@ int main(int argc, char const *argv[]) {
 	do {
 		printf("# ");               		// print the prompt
         command = get_user_input();
-        // printf("hey");
-        // num_tokens = tokenize_command(command, tokens);
+        char *copy = malloc((strlen(command)+1)*sizeof(char));
+        strlcpy(copy, command, strlen(command)+1);
+
+        num_tokens = tokenize_command(copy, tokens);
         
-        // for(int i=0; i<num_tokens; i++){
-        //     printf("%d: %s/n", i, tokens[i]);
-        // }
-		free(command);				
+        for(int i=0; i<num_tokens; i++){
+            printf("%d: %s/n", i, tokens[i]);
+        }
+		free(command);
+        free(copy);
+        free(tokens);				
 	} while (status);
 
 	return EXIT_SUCCESS;
