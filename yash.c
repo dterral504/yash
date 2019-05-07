@@ -10,10 +10,11 @@
 
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
 
+char *command;
 // returns the user command as a single line of input
-char *get_user_input(void)
+void get_user_input(void)
 {
-	char *command = malloc(sizeof(char) * (MAX_LINE_SIZE + 1)); // allocate memory for command
+	command = malloc(sizeof(char) * (MAX_LINE_SIZE + 1)); // allocate memory for command
 	// int i = 0;											  // initialize index to 0
 	// int next;											  // will hold next character of user input
 	
@@ -22,35 +23,7 @@ char *get_user_input(void)
 		exit(EXIT_FAILURE);
 	}
     char* ptr = fgets(command, MAX_LINE_SIZE, stdin);
-    printf("okay\n");
-    int i = 0;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    i++;
-    
-    return command;
+}
 
 	// while (true){
 	// 	next = getchar(); // get next character of input
@@ -76,14 +49,13 @@ int main(int argc, char const *argv[]) {
 	// process user commands until the shell is exited
 	do {
 		printf("# ");               		// print the prompt
-        command = get_user_input();
-        printf("tokeize");
+        get_user_input();
+        printf("%s\n", command);
         num_tokens = tokenize_command(command, tokens);
         
         for(int i=0; i<num_tokens; i++){
             printf("%d: %s/n", i, tokens[i]);
         }
-        printf("free!");
 		free(command);
         free(tokens);				
 	} while (status);
