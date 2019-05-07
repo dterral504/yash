@@ -13,26 +13,28 @@
 // returns the user command as a single line of input
 char *get_user_input(void)
 {
-	char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for command
-	int i = 0;											  // initialize index to 0
-	int next;											  // will hold next character of user input
+	char *command = malloc(sizeof(char) * (MAX_LINE_SIZE + 1)); // allocate memory for command
+	// int i = 0;											  // initialize index to 0
+	// int next;											  // will hold next character of user input
 	
 	if (!command){                                        // check to make sure memory was succesfully allocated
 		fprintf(stderr, "Exit: allocation error\n");
 		exit(EXIT_FAILURE);
 	}
+    command = fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+    return command;
 
-	while (true){
-		next = getchar(); // get next character of input
-		// if next character is end of the command, null terminate the command and return it
-		if (next == '\n' || next == EOF){
-			command[i] = '\0';
-			return command;
-		}
-		// next is not end of command so append it to the command array and increment i
-		command[i] = next;
-		i++;
-	}
+	// while (true){
+	// 	next = getchar(); // get next character of input
+	// 	// if next character is end of the command, null terminate the command and return it
+	// 	if (next == '\n' || next == EOF){
+	// 		command[i] = '\0';
+	// 		return command;
+	// 	}
+	// 	// next is not end of command so append it to the command array and increment i
+	// 	command[i] = next;
+	// 	i++;
+	// }
 }
 
 // *** main() ***
@@ -47,18 +49,27 @@ int main(int argc, char const *argv[]) {
 	do {
 		printf("# ");               		// print the prompt
         command = get_user_input();
-        char *copy = malloc((strlen(command)+1)*sizeof(char));
-        strcpy(copy, command);
 
-        num_tokens = tokenize_command(copy, tokens);
+        num_tokens = tokenize_command(command, tokens);
         
         for(int i=0; i<num_tokens; i++){
             printf("%d: %s/n", i, tokens[i]);
         }
 		free(command);
-        free(copy);
         free(tokens);				
 	} while (status);
 
 	return EXIT_SUCCESS;
+}
+
+
+int main2(int argc, char const *argv[]) {
+
+    char buffer[MAX_LINE_SIZE+1];
+    char *ptr = fgets(buffer, MAX_LINE_SIZE, stdin);
+    if (ptr == NULL) exit(1); // error
+    int len = strlen(buffer);
+    if (buffer[len-1] == '\n') buffer[len-1] = '\0'; // this should always be true
+
+
 }
