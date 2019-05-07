@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include "parse.h"
 // #include <sys/types.h>
 // #include <sys/stat.h>
 // #include <fcntl.h>
@@ -37,13 +38,15 @@ char *get_user_input(void)
 // continuously handles user commands until the shell is exited
 int main(int argc, char const *argv[]) {
 
-	char *command;
+	char *command;  // holds user input
+    char **tokens;  // tokenizes user input
+	int num_tokens; // num of tokens in user input
 	int status = 1;
 	// process user commands until the shell is exited
 	do {
 		printf("# ");               		// print the prompt
         command = get_user_input();
-        
+        num_tokens = tokenize_command(command, tokens);
 		free(command);					
 	} while (status);
 
