@@ -49,12 +49,13 @@ int main(int argc, char const *argv[]) {
 	do {
 		printf("# ");               		// print the prompt
         command = get_user_input();
-
+        printf("tokeize");
         num_tokens = tokenize_command(command, tokens);
         
         for(int i=0; i<num_tokens; i++){
             printf("%d: %s/n", i, tokens[i]);
         }
+        printf("free!");
 		free(command);
         free(tokens);				
 	} while (status);
