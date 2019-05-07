@@ -33,4 +33,4 @@ int tokenize_command(char *command, char **tokens);
 
 // bool parse_jobs(char *tokens[], int num_tokens, job_t *out[2], int *num_jobs_out);
 
-// #endif
+#endif
