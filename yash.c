@@ -66,11 +66,22 @@ int main(int argc, char const *argv[]) {
 
 int main2(int argc, char const *argv[]) {
 
-    char buffer[MAX_LINE_SIZE+1];
-    char *ptr = fgets(buffer, MAX_LINE_SIZE, stdin);
-    if (ptr == NULL) exit(1); // error
-    int len = strlen(buffer);
-    if (buffer[len-1] == '\n') buffer[len-1] = '\0'; // this should always be true
+    char **tokens;
+
+    while(1)
+    {
+        char buffer[MAX_LINE_SIZE+1];
+        char *ptr = fgets(buffer, MAX_LINE_SIZE, stdin);
+        if (ptr == NULL) exit(1); // error
+        int len = strlen(buffer);
+        if (buffer[len-1] == '\n') buffer[len-1] = '\0'; // this should always be true
+        int num_tokens = tokenize_command(buffer, tokens);
+        for(int i=0; i<num_tokens; i++){
+            printf("%d: %s/n", i, tokens[i]);
+        }
+        free(tokens);	
+    }
+    
 
 
 }
