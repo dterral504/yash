@@ -52,8 +52,7 @@ int main(int argc, char const *argv[]) {
         for(int i=0; i<num_tokens; i++){
             printf("%d: %s/n", i, tokens[i]);
         }
-		free(command);	
-        free(tokens);				
+		free(command);				
 	} while (status);
 
 	return EXIT_SUCCESS;
