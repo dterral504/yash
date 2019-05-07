@@ -9,8 +9,9 @@
 int tokenize_command(char *command, char **tokens)
 {
     // initialize token array
-    int array_size = MAX_TOKENS;                  // initial size of token array
     printf("hey");
+    int array_size = MAX_TOKENS;                  // initial size of token array
+    
     tokens = malloc(sizeof(char *) * array_size); // allocate memory for token array
     int i = 0;                                    // index into token array
 
