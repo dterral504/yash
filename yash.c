@@ -42,7 +42,6 @@ void get_user_input(void)
 // continuously handles user commands until the shell is exited
 int main(int argc, char const *argv[]) {
 
-	char *command;  // holds user input
     char **tokens;  // tokenizes user input
 	int num_tokens; // num of tokens in user input
 	int status = 1;
