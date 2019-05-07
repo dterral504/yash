@@ -49,8 +49,9 @@ int main(int argc, char const *argv[]) {
 	do {
 		printf("# ");               		// print the prompt
         get_user_input();
-        printf("%s\n", command);
-        num_tokens = tokenize_command(command, tokens);
+        char* cmd_copy = realloc(command, strlen(command)+1);
+        num_tokens = tokenize_command(cmd_copy, tokens);
+        free(cmd_copy);
         
         for(int i=0; i<num_tokens; i++){
             printf("%d: %s/n", i, tokens[i]);
