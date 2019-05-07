@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
 		printf("# ");               		// print the prompt
         command = get_user_input();
         char *copy = malloc((strlen(command)+1)*sizeof(char));
-        strlcpy(copy, command, strlen(command)+1);
+        strcpy(copy, command);
 
         num_tokens = tokenize_command(copy, tokens);
         
