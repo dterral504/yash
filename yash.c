@@ -48,7 +48,8 @@ int main(int argc, char const *argv[]) {
         command = get_user_input();
         num_tokens = tokenize_command(command, tokens);
         printf("0:%s, 1:%s, 2:%s", tokens[0], tokens[1], tokens[2]);
-		free(command);					
+		free(command);	
+        free(tokens);				
 	} while (status);
 
 	return EXIT_SUCCESS;
