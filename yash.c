@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#include <malloc/malloc.h> // malloc/malloc.h on macs
+#include <malloc.h> // malloc/malloc.h on macs
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
