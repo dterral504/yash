@@ -8,6 +8,31 @@
 
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
 
+// returns the user command as a single line of input
+char *get_user_input(void)
+{
+	char *command = malloc(sizeof(char) * MAX_LINE_SIZE); // allocate memory for command
+	int i = 0;											  // initialize index to 0
+	int next;											  // will hold next character of user input
+	
+	if (!command){                                        // check to make sure memory was succesfully allocated
+		fprintf(stderr, "Exit: allocation error\n");
+		exit(EXIT_FAILURE);
+	}
+
+	while (true){
+		next = getchar(); // get next character of input
+		// if next character is end of the command, null terminate the command and return it
+		if (next == '\n' || next == EOF){
+			command[i] = '\0';
+			return command;
+		}
+		// next is not end of command so append it to the command array and increment i
+		command[i] = next;
+		i++;
+	}
+}
+
 // *** main() ***
 // continuously handles user commands until the shell is exited
 int main(int argc, char const *argv[]) {
@@ -17,8 +42,8 @@ int main(int argc, char const *argv[]) {
 	// process user commands until the shell is exited
 	do {
 		printf("# ");               		// print the prompt
-        command = malloc(sizeof(char)*MAX_LINE_SIZE);
-		command = fgets(command, MAX_LINE_SIZE, STDIN_FILENO);
+        command = get_user_input();
+        printf("%s", command);
 		free(command);					
 	} while (status);
 
