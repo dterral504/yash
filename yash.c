@@ -23,7 +23,7 @@ void get_user_input(void)
 		exit(EXIT_FAILURE);
 	}
     char* ptr = fgets(command, MAX_LINE_SIZE, stdin);
-}
+
 
 	// while (true){
 	// 	next = getchar(); // get next character of input
