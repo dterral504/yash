@@ -21,7 +21,7 @@ char *get_user_input(void)
 		fprintf(stderr, "Exit: allocation error\n");
 		exit(EXIT_FAILURE);
 	}
-    fgets(command, MAX_LINE_SIZE, stdin);
+    char* ptr = fgets(command, MAX_LINE_SIZE, stdin);
     return command;
 
 	// while (true){
