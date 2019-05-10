@@ -10,6 +10,7 @@
 // #include <fcntl.h>
 
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
+#define MAX_TOKENS 50	  // defines initial size of allocated memory for token array
 
 int main(int argc, char const *argv[])
 {

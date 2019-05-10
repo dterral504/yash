@@ -3,11 +3,6 @@
 
 #include <stdbool.h>
 
-#define MAX_TOKENS 50 // defines size of allocated memory for token array
-#define STDIN 0
-#define STDOUT 1
-#define STDERR 2
-
 // typedef struct
 // {
 //     char *command;
@@ -24,8 +19,6 @@
 // void free_job(job_t *job);
 
 // char *alloc_and_copy_str(char *str);
-
-int tokenize_command(const char *command, char **tokens);
 
 // bool is_valid_command(char **tokens, int num);
 
