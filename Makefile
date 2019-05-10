@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
-DEPS = parse.h
-OBJ = yash.o parse.o 
+DEPS = parse.h jobcontrol.h debug.h
+OBJ = yash.o parse.o jobcontrol.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

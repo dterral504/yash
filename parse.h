@@ -25,7 +25,7 @@
 
 // char *alloc_and_copy_str(char *str);
 
-int tokenize_command(char *command, char **tokens);
+int tokenize_command(const char *command, char **tokens);
 
 // bool is_valid_command(char **tokens, int num);
 

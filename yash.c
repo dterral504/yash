@@ -4,84 +4,40 @@
 #include <string.h>
 #include <unistd.h>
 #include "parse.h"
+#include "debug.h"
 // #include <sys/types.h>
 // #include <sys/stat.h>
 // #include <fcntl.h>
 
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
 
-char *command;
-// returns the user command as a single line of input
-void get_user_input(void)
+int main(int argc, char const *argv[])
 {
-	command = malloc(sizeof(char) * (MAX_LINE_SIZE + 1)); // allocate memory for command
-	// int i = 0;											  // initialize index to 0
-	// int next;											  // will hold next character of user input
-	
-	if (!command){                                        // check to make sure memory was succesfully allocated
-		fprintf(stderr, "Exit: allocation error\n");
-		exit(EXIT_FAILURE);
+
+	while (1)
+	{
+		char *buffer = calloc(1, sizeof(char) * (MAX_LINE_SIZE + 1)); // holds user input
+		char **tokens;
+		int argc;
+		printf("# ");									 // print prompt
+		char *ptr = fgets(buffer, MAX_LINE_SIZE, stdin); // get user input in buffer
+		if (ptr == NULL)
+			exit(1); // user input error
+
+		// null terminate user input
+		int len = strlen(buffer);
+		if (buffer[len - 1] == '\n')
+			buffer[len - 1] = '\0'; // this should always be true
+		// tokenize user input
+		int num_tokens = tokenize_command((const char *)buffer, tokens);
+		for (int i = 0; i < num_tokens; i++)
+		{
+			if (DEBUG)
+			{
+				printf("%d: %s/n", i, tokens[i]);
+			}
+		}
+		free(buffer);
+		free(tokens);
 	}
-    char* ptr = fgets(command, MAX_LINE_SIZE, stdin);
-
-
-	// while (true){
-	// 	next = getchar(); // get next character of input
-	// 	// if next character is end of the command, null terminate the command and return it
-	// 	if (next == '\n' || next == EOF){
-	// 		command[i] = '\0';
-	// 		return command;
-	// 	}
-	// 	// next is not end of command so append it to the command array and increment i
-	// 	command[i] = next;
-	// 	i++;
-	// }
-}
-
-// *** main() ***
-// continuously handles user commands until the shell is exited
-int main2(int argc, char const *argv[]) {
-
-    char **tokens;  // tokenizes user input
-	int num_tokens; // num of tokens in user input
-	int status = 1;
-	// process user commands until the shell is exited
-	do {
-		printf("# ");               		// print the prompt
-        get_user_input();
-        char* cmd_copy = realloc(command, strlen(command)+1);
-        num_tokens = tokenize_command(cmd_copy, tokens);
-        free(cmd_copy);
-        
-        for(int i=0; i<num_tokens; i++){
-            printf("%d: %s/n", i, tokens[i]);
-        }
-		free(command);
-        free(tokens);				
-	} while (status);
-
-	return EXIT_SUCCESS;
-}
-
-
-int main(int argc, char const *argv[]) {
-
-    char **tokens;
-
-    while(1)
-    {
-        char buffer[MAX_LINE_SIZE+1];
-        char *ptr = fgets(buffer, MAX_LINE_SIZE, stdin);
-        if (ptr == NULL) exit(1); // error
-        int len = strlen(buffer);
-        if (buffer[len-1] == '\n') buffer[len-1] = '\0'; // this should always be true
-        int num_tokens = tokenize_command(buffer, tokens);
-        for(int i=0; i<num_tokens; i++){
-            printf("%d: %s/n", i, tokens[i]);
-        }
-        free(tokens);	
-    }
-    
-
-
 }
