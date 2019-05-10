@@ -53,6 +53,7 @@ int tokenize_command(const char *command, char **tokens)
             printf("next: %s\n", next);
         }
     }
+    free(cmd_copy);
     tokens[i] = NULL;
     return i;
 }
