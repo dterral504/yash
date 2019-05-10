@@ -12,6 +12,42 @@
 #define MAX_LINE_SIZE 2000 // used to add restriction to user input
 #define MAX_TOKENS 50	  // defines initial size of allocated memory for token array
 
+int tokenize_command(char **tokens, char *command, int max_tokens)
+{
+	// initialize variables for strtok_r
+	int i = 0;					   // arg count
+	char *next;					   // holds each token - used for strtok_r
+	char *save_ptr = NULL;		   // save ptr for strtok_r
+	const char *delimeter = " \n"; // delimeters for strtok_r
+
+	// tokenize user input
+	for (next = strtok_r(command, delimeter, &save_ptr);
+		 next != NULL;
+		 next = strtok_r(NULL, delimeter, &save_ptr))
+	{
+		tokens[i] = next;
+		i++;
+
+		// allocate more space if neccessary
+		if (i >= max_tokens)
+		{
+			max_tokens += MAX_TOKENS;
+			tokens = realloc(tokens, sizeof(char *) * max_tokens);
+			if (!tokens)
+			{ // check to make sure memory was succesfully allocated
+				fprintf(stderr, "Exit: allocation error\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		if (DEBUG)
+		{
+			printf("next: %s\n", next);
+		}
+	}
+	tokens[i] = NULL; // null terminate tokens array
+	return i;
+}
+
 int main(int argc, char const *argv[])
 {
 
@@ -29,9 +65,6 @@ int main(int argc, char const *argv[])
 		if (buffer[len - 1] == '\n')
 			buffer[len - 1] = '\0'; // this should always be true
 
-		// tokenize user input
-		// int num_tokens = tokenize_command((const char *)buffer, tokens);
-		// *************
 		// initialize token array
 		int max_tokens = MAX_TOKENS;							// initial size of token array
 		char **tokens = calloc(1, sizeof(char *) * max_tokens); // allocate memory for token array
@@ -45,6 +78,9 @@ int main(int argc, char const *argv[])
 		char *cmd_copy = calloc(1, sizeof(char) * (strlen(buffer) + 1));
 		strcpy(cmd_copy, buffer);
 
+		int token_count = tokenize_command(tokens, cmd_copy, max_tokens);
+
+		/*	
 		// initialize variables for strtok_r
 		int i = 0;					   // arg count
 		char *next;					   // holds each token - used for strtok_r
@@ -76,7 +112,8 @@ int main(int argc, char const *argv[])
 			}
 		}
 		tokens[i] = NULL; // null terminate tokens array
-		// *************
+		*/
+
 		free(cmd_copy);
 		free(buffer);
 		free(tokens);
